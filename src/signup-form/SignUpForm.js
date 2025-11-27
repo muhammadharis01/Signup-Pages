@@ -22,7 +22,7 @@ const SignupForm = () => {
         fail += validatePassword(formData.password)
         fail += validateEmail(formData.email)
 
-        if   (fail == "") {
+        if   (fail === "") {
             axios.post('http://localhost/login-pages/create_user.php', formData)
             .then(response => {
                 console.log("Response from backend:", response);
@@ -41,7 +41,7 @@ const SignupForm = () => {
     }
 
     function validateUsername(field) {
-        if (field == "") return "No Username was entered.\n"
+        if (field === "") return "No Username was entered.\n"
         else if (field.length < 5)
             return "Usernames must be at least 5 characters.\n"
         else if (/[^a-zA-Z0-9_-]/.test(field))
@@ -50,7 +50,7 @@ const SignupForm = () => {
     }
 
     function validatePassword(field) {
-        if (field == "") return "No Password was entered.\n"
+        if (field === "") return "No Password was entered.\n"
         else if (field.length < 6)
             return "Passwords must be at least 6 characters.\n"
         else if (!/[a-z]/.test(field) || ! /[A-Z]/.test(field) ||
@@ -60,7 +60,7 @@ const SignupForm = () => {
     }
 
     function validateEmail(field) {
-        if (field == "") return "No Email was entered.\n"
+        if (field === "") return "No Email was entered.\n"
         else if (!((field.indexOf(".") > 0) &&
             (field.indexOf("@") > 0)) ||
             /[^a-zA-Z0-9.@_-]/.test(field))
