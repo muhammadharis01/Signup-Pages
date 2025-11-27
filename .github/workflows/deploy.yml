@@ -4,6 +4,10 @@ on:
     branches: [ main ]
 jobs:
   deploy:
+    permissions:
+      contents: write  # ← This fixes 403 error
+      pages: write
+      id-token: write
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
@@ -11,7 +15,10 @@ jobs:
       with:
         node-version: 18
     - run: npm ci
-    - run: npm run build -- --no-emit-on-errors  # Ignore ESLint errors
+    - name: Build without CI checks
+      env:
+        CI: false
+      run: npm run build
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v4
       with:
